@@ -15,7 +15,7 @@ export class Register extends Component {
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0 && this.state.password == this.state.repeat_password;
+    return this.state.email.length > 0 && this.state.password.length > 0 && this.state.password === this.state.repeat_password;
   }
 
   handleChange = event => {
