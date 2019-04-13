@@ -3,6 +3,7 @@ import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import "./Calculation.css";
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import { userService } from '../services/user.service';
+import FileUploard from './FileUploader'
 
 class Calculation extends Component {
     constructor(props) {
@@ -71,13 +72,14 @@ class Calculation extends Component {
                 />
               </FormGroup>
               <FormGroup controlId="problem_file" bsSize="large">
-                <Form.Label>Problem File</Form.Label>
-                <FormControl
+                <Form.Label>Select Problem File</Form.Label>
+                {/* <FormControl
                   autoFocus
                   type="problem_file"
                   value={this.state.problem_file}
                   onChange={this.handleChange}
-                />
+                /> */}
+                <FileUploard/>
               </FormGroup>
               <Button
                 block
@@ -87,10 +89,7 @@ class Calculation extends Component {
               >
                 Start
               </Button>
-
               <ProgressBar now={this.state.precent} />
-
-
             </form>
           </div>
         );
