@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import Login from './components/Login';
+import Register from './components/Register';
 import Header from './components/Header';
 import Particles from 'react-particles-js';
+import { Route } from 'react-router-dom'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
       <Header/>
-       <Login/>
+      <Route exact path="/" component={Login} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Register} />
        <Particles 
               params={{
             		"particles": {

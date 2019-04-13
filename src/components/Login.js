@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import "./Login.css";
+import { NavLink } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
@@ -60,6 +61,7 @@ class Login extends Component {
             Login
           </Button>
         </form>
+        <NavLink exact to="/register"> Create New Account </NavLink>
       </div>
     );
   }
