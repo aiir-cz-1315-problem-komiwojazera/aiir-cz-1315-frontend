@@ -21,7 +21,7 @@ const headerStyle = {
 const nameStyle = {
   fontSize: '25px',
   color: 'white',
-  display: 'inline-block'
+
 }
 
 const logoutStyle = {
@@ -29,5 +29,5 @@ const logoutStyle = {
   textAlign: 'right',
   padding: '10px',
   color: 'white',
-
+  marginTop: '-40px'
 }
