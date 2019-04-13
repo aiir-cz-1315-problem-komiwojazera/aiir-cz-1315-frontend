@@ -11,7 +11,7 @@ class Calculation extends Component {
           problem_name: "",
           lenght: "",
           route: "",
-          progress: 50
+          precent: 50
         };
     }
 
@@ -29,18 +29,13 @@ class Calculation extends Component {
     
     handleSubmit = event => {
         event.preventDefault();
-        this.state.progress += 10;
-        console.log(this.state.progress);
+        this.state.precent += 10;
+        console.log(this.state.precent);
       }
 
     progress = () => {
-        const { completed } = this.state;
-        if (completed === 100) {
-          this.setState({ completed: 0 });
-        } else {
-          const diff = Math.random() * 10;
-          this.setState({ completed: Math.min(completed + diff, 100) });
-        }
+        this.setState({ completed: false });
+
     };
 
     componentDidMount() {
@@ -83,7 +78,8 @@ class Calculation extends Component {
               >
                 Start
               </Button>
-              <ProgressBar now={this.state.progress} />
+
+              <ProgressBar now={this.state.precent} />
 
 
             </form>
