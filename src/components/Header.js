@@ -13,18 +13,21 @@ export default class Header extends Component {
 }
 
 const headerStyle = {
-    background: '#333',
-    padding: '2rem',
+  background: '#333',
+  padding: '2rem', 
+  
 }
 
 const nameStyle = {
-  textAlign: 'center',
   fontSize: '25px',
   color: 'white',
+  display: 'inline-block'
 }
 
 const logoutStyle = {
   float: 'right',
   textAlign: 'right',
+  padding: '10px',
   color: 'white',
+
 }
