@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import "./Calculation.css";
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import { userService } from '../services/user.service';
 
 class Calculation extends Component {
     constructor(props) {
@@ -14,6 +15,14 @@ class Calculation extends Component {
           progress: 50
         };
     }
+
+    componentDidMount() {
+      this.setState({ 
+          user: JSON.parse(localStorage.getItem('user')),
+          users: { loading: true }
+      });
+      userService.getAll().then(users => this.setState({ users }));
+  }
 
     validateForm() {
         return this.state.problem_name.length > 0;

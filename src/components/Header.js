@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 
 export default class Header extends Component {
   render() {
     return (
       <header style = {headerStyle}>
-        <h3>Travelling Salesman Problem Solver</h3>
+        <div style={nameStyle} >Travelling Salesman Problem Solver</div>
+        <NavLink style={logoutStyle} exact to="/login"> Logout </NavLink>
       </header>
     )
   }
@@ -12,8 +14,17 @@ export default class Header extends Component {
 
 const headerStyle = {
     background: '#333',
-    color: '#fff',
-    textAlign: 'center',
-    padding: '1rem'
+    padding: '2rem',
+}
 
+const nameStyle = {
+  textAlign: 'center',
+  fontSize: '25px',
+  color: 'white',
+}
+
+const logoutStyle = {
+  float: 'right',
+  textAlign: 'right',
+  color: 'white',
 }
