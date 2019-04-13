@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
+import { Button, FormGroup, FormControl, Form, Alert } from "react-bootstrap";
 import "./Login.css";
 import { NavLink } from 'react-router-dom';
+import { userService } from '../services/user.service';
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
+    userService.logout();
+
     this.state = {
-      email: "",
-      password: ""
+      username: "",
+      password: "",
+      submitted: false,
+      loading: false,
+      error: ''
     };
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.username.length > 0 && this.state.password.length > 0;
   }
 
   handleChange = event => {
@@ -25,7 +31,26 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state.email)
+    console.log(this.state)
+
+    this.setState({ submitted: true });
+    const { username, password, returnUrl } = this.state;
+
+    // stop here if form is invalid
+    if (!(username && password)) {
+        return;
+    }
+
+    this.setState({ loading: true });
+    userService.login(username, password)
+        .then(
+            user => {
+                const { from } = this.props.location.state || { from: { pathname: "/" } };
+                this.props.history.push(from);
+            },
+            error => this.setState({ error, loading: false })
+        );
+        console.log(this.state)
   }
 
   render() {
@@ -35,12 +60,12 @@ class Login extends Component {
           <h3>Sign In</h3>
         </div>
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="username" bsSize="large">
             <Form.Label>Email</Form.Label>
             <FormControl
               autoFocus
-              type="email"
-              value={this.state.email}
+              type="text"
+              value={this.state.username}
               onChange={this.handleChange}
             />
           </FormGroup>
@@ -62,7 +87,11 @@ class Login extends Component {
           </Button>
         </form>
         <NavLink exact to="/register"> Create New Account </NavLink>
+        
       </div>
+
+
+
     );
   }
 }
