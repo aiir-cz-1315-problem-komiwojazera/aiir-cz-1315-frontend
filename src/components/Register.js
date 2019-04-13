@@ -9,12 +9,19 @@ export class Register extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      repeat_password: ""
     };
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.email.length > 0 && this.state.password.length > 0 && this.state.password == this.state.repeat_password;
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.id]: event.target.value
+    });
   }
 
   handleSubmit = event => {
@@ -49,7 +56,7 @@ export class Register extends Component {
         <FormGroup controlId="repeat_password" bsSize="large">
           <Form.Label>Repeat Password</Form.Label>
           <FormControl
-            value={this.state.password}
+            value={this.state.repeat_password}
             onChange={this.handleChange}
             type="password"
           />
