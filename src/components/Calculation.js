@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
-import "./Login.css";
-import { NavLink } from 'react-router-dom';
+import "./Calculation.css";
+import ProgressBar from 'react-bootstrap/ProgressBar'
 
 class Calculation extends Component {
     constructor(props) {
@@ -9,9 +9,9 @@ class Calculation extends Component {
     
         this.state = {
           problem_name: "",
-          Lenght: "",
-          Route: "",
-          Progres: 0
+          lenght: "",
+          route: "",
+          progress: 50
         };
     }
 
@@ -27,13 +27,35 @@ class Calculation extends Component {
         //tu dodaj request by wystartować obliczenia
     }
     
+    handleSubmit = event => {
+        event.preventDefault();
+        this.state.progress += 10;
+        console.log(this.state.progress);
+      }
+
+    progress = () => {
+        const { completed } = this.state;
+        if (completed === 100) {
+          this.setState({ completed: 0 });
+        } else {
+          const diff = Math.random() * 10;
+          this.setState({ completed: Math.min(completed + diff, 100) });
+        }
+    };
+
+    componentDidMount() {
+        this.timer = setInterval(this.progress, 500);
+      }
+    
+      componentWillUnmount() {
+        clearInterval(this.timer);
+    }
 
     render() {
+        const { classes } = this.props;
         return (
           <div className="Calculations">
-            <div>
-              <h3>Sign In</h3>
-            </div>
+
             <form onSubmit={this.handleSubmit}>
               <FormGroup controlId="problem_name" bsSize="large">
                 <Form.Label>Problem Name</Form.Label>
@@ -44,12 +66,12 @@ class Calculation extends Component {
                   onChange={this.handleChange}
                 />
               </FormGroup>
-              <FormGroup controlId="problem_name" bsSize="large">
+              <FormGroup controlId="problem_file" bsSize="large">
                 <Form.Label>Problem File</Form.Label>
                 <FormControl
                   autoFocus
-                  type="problem_name"
-                  value={this.state.problem_name}
+                  type="problem_file"
+                  value={this.state.problem_file}
                   onChange={this.handleChange}
                 />
               </FormGroup>
@@ -61,8 +83,10 @@ class Calculation extends Component {
               >
                 Start
               </Button>
+              <ProgressBar now={this.state.progress} />
+
+
             </form>
-            <NavLink exact to="/register"> Create New Account </NavLink>
           </div>
         );
       }
