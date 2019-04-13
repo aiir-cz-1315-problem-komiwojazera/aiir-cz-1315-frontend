@@ -32,7 +32,7 @@ function login(username, password) {
         });
 }
 
-function login(username, password) {
+function register(username, password) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
