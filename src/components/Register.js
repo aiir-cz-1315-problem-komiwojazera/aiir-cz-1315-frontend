@@ -26,7 +26,26 @@ export class Register extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state.email)
+
+    const { email, password } = this.state;
+
+    if (!(email && password)) {
+      return;
+    }
+
+    userService.register(email, password)
+    .then(
+      user => {
+          const { from } = this.props.location.state || { from: { pathname: "/" } };
+          this.props.history.push(from);
+      },
+      error => this.setState({ error, loading: false })
+     );
+  }
+
+  handleRegister = event => {
+    event.preventDefault();
+    console.log(this.state)
   }
 
   render() {
@@ -66,6 +85,7 @@ export class Register extends Component {
           bsSize="large"
           disabled={!this.validateForm()}
           type="submit"
+          onClick={this.handleRegister}
         >
           Register
         </Button>
