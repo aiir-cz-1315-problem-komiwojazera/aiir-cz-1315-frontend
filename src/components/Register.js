@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import "./Register.css";
+import { userService } from '../services/user.service';
 
 export class Register extends Component {
 
