@@ -25,9 +25,9 @@ export class Register extends Component {
     });
   }
 
-  handleSubmit = event => {
+  handleRegister = event => {
     event.preventDefault();
-
+    console.log("submit")
     const { email, password } = this.state;
 
     if (!(email && password)) {
@@ -40,13 +40,8 @@ export class Register extends Component {
           const { from } = this.props.location.state || { from: { pathname: "/" } };
           this.props.history.push(from);
       },
-      error => this.setState({ error, loading: false })
+      error => console.log(error)//this.setState({ error, loading: false })
      );
-  }
-
-  handleRegister = event => {
-    event.preventDefault();
-    console.log(this.state)
   }
 
   render() {
@@ -55,7 +50,7 @@ export class Register extends Component {
       <div>
         <h3>Registration Form</h3>
       </div>
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <FormGroup controlId="email" bsSize="large">
           <Form.Label>Email</Form.Label>
           <FormControl
