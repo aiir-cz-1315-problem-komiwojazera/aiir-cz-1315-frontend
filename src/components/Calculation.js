@@ -71,16 +71,18 @@ class Calculation extends Component {
                   onChange={this.handleChange}
                 />
               </FormGroup>
+              {/*
               <FormGroup controlId="problem_file" bsSize="large">
                 <Form.Label>Select Problem File</Form.Label>
-                {/* <FormControl
+                { <FormControl
                   autoFocus
                   type="problem_file"
                   value={this.state.problem_file}
                   onChange={this.handleChange}
-                /> */}
+                /> }
                 <FileUploard/>
               </FormGroup>
+              */}
               <Button
                 block
                 bsSize="large"
@@ -89,7 +91,9 @@ class Calculation extends Component {
               >
                 Start
               </Button>
-              <ProgressBar now={this.state.precent} />
+              {/*<ProgressBar now={this.state.precent} />*/}
+              < FormGroup controlId = "problem_name" bsSize = "large" >
+              < /FormGroup>
             </form>
           </div>
         );
