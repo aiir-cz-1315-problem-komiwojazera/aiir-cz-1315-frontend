@@ -7,17 +7,22 @@ export const userService = {
 };
 
 const config= {
-    apiUrl: 'http://localhost:3000'
+    //apiUrl: 'http://localhost:3000'
+    apiUrl: 'http://192.168.0.111:5000'
 }
 
 function login(username, password) {
     const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        //method: 'POST',
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'no-cors'},
+        
+        //body: JSON.stringify({ username, password }),
+        //data: JSON.stringify({ username, password })
+        
     };
 
-    return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+    return fetch(`${config.apiUrl}/login`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // login successful if there's a user in the response
@@ -39,13 +44,15 @@ function register(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`${config.apiUrl}/users/registration`, requestOptions)
+    //return fetch(`${config.apiUrl}/users/registration`, requestOptions)
+    return fetch(`${config.apiUrl}/user/registration`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // login successful if there's a user in the response
             if (user) {
                 // store user details and basic auth credentials in local storage 
                 // to keep user logged in between page refreshes
+                console.log("Loging succesful");
                 user.authdata = window.btoa(username + ':' + password);
                 localStorage.setItem('user', JSON.stringify(user));
             }
@@ -69,6 +76,7 @@ function getAll() {
 }
 
 function handleResponse(response) {
+    console.log('handling response');
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         if (!response.ok) {
