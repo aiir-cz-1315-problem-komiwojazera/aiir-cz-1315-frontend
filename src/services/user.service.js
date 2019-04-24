@@ -15,9 +15,12 @@ function login(username, password) {
     const requestOptions = {
         //method: 'POST',
         method: 'GET',
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'no-cors'},
-        
+        headers: { 'Content-Type': 'application/json',
+        "Authorization": "Basic QWRtaW46MTIzNDU=",
+        "cache-control": "no-cache",},
+        "processData": false,
         //body: JSON.stringify({ username, password }),
+        "data": "{\"name\" : \"${username}\", \"password\" : \"${password}\"}",
         //data: JSON.stringify({ username, password })
         
     };
@@ -60,6 +63,34 @@ function register(username, password) {
             return user;
         });
 }
+
+function startCalc(problem_name) {
+    const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json',
+        "Authorization": "Basic QWRtaW46MTIzNDU=",
+        "cache-control": "no-cache",},
+        "processData": false,
+        "data": "{\"problem\" : ${problem_name}",
+    };
+
+    //return fetch(`${config.apiUrl}/users/registration`, requestOptions)
+    return fetch(`${config.apiUrl}/calcStart`, requestOptions)
+        .then(handleResponse)
+        .then(user => {
+            // login successful if there's a user in the response
+            if (user) {
+                // store user details and basic auth credentials in local storage 
+                // to keep user logged in between page refreshes
+                console.log("Started Succesfully");
+                //user.authdata = window.btoa(user);
+                //localStorage.setItem('user', JSON.stringify(user));
+            }
+
+            return user;
+        });
+}
+
 
 function logout() {
     // remove user from local storage to log user out
