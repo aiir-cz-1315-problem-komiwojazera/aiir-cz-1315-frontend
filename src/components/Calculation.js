@@ -36,12 +36,26 @@ class Calculation extends Component {
         });
         //tu dodaj request by wystartować obliczenia
     }
-    
-    handleSubmit = event => {
-        event.preventDefault();
-        this.state.precent += 10;
-        console.log(this.state.precent);
+
+    handleStart = event => {
+      event.preventDefault();
+      console.log("submit")
+      const {problem_name} = this.state;
+
+      if (!problem_name) {
+        return;
       }
+
+      userService.startCalc(problem_name)
+        .then(user => {
+            const { from } = this.props.location.state || {
+              from: {pathname: "/"}
+            };
+            this.props.history.push(from);
+          },
+          error => console.log(error) //this.setState({ error, loading: false })
+        );
+    }
 
     progress = () => {
         this.setState({ completed: false });
@@ -88,12 +102,12 @@ class Calculation extends Component {
                 bsSize="large"
                 disabled={!this.validateForm()}
                 type="submit"
+                onClick = {this.handleStart}
               >
                 Start
               </Button>
               {/*<ProgressBar now={this.state.precent} />*/}
-              < FormGroup controlId = "problem_name" bsSize = "large" >
-              < /FormGroup>
+
             </form>
           </div>
         );

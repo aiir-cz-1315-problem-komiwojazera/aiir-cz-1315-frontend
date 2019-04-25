@@ -4,13 +4,14 @@ export const userService = {
     login,
     logout,
     getAll,
-    register
+    register,
+    startCalc
 };
 
 const config= {
     //apiUrl: 'http://localhost:3000'
     // apiUrl: 'http://192.168.0.111:5000'
-    apiUrl: 'http://0.0.0.0:5000'
+    apiUrl: 'http://localhost:5000'
 }
 
 function login(username, password) {
@@ -65,12 +66,13 @@ function register(username, password) {
 
 function startCalc(problem_name) {
     const requestOptions = {
-        method: 'GET',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json',
         "Authorization": "Basic QWRtaW46MTIzNDU=",
         "cache-control": "no-cache",},
         "processData": false,
-        "data": "{\"problem\" : ${problem_name}",
+        body: JSON.stringify({problem_name}),
+        data: JSON.stringify({problem_name})
     };
 
     //return fetch(`${config.apiUrl}/users/registration`, requestOptions)
