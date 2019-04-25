@@ -14,7 +14,7 @@ class Calculation extends Component {
           lenght: "",
           route: "",
           precent: 0,
-          result: "no result",
+          result: "",
         };
     }
 
@@ -46,7 +46,7 @@ class Calculation extends Component {
       if (!problem_name) {
         return;
       }
-      
+
       this.setState({precent: 25})
 
       userService.startCalc(problem_name)
