@@ -13,7 +13,8 @@ class Calculation extends Component {
           problem_name: "",
           lenght: "",
           route: "",
-          precent: 50
+          precent: 50,
+          result: 56,
         };
     }
 
@@ -47,11 +48,11 @@ class Calculation extends Component {
       }
 
       userService.startCalc(problem_name)
-        .then(user => {
-            const { from } = this.props.location.state || {
-              from: {pathname: "/"}
-            };
-            this.props.history.push(from);
+        .then(result => {
+
+          this.setState({ 
+            result: JSON.parse(localStorage.getItem('result')),
+        });
           },
           error => console.log(error) //this.setState({ error, loading: false })
         );
@@ -85,7 +86,7 @@ class Calculation extends Component {
                   onChange={this.handleChange}
                 />
               </FormGroup>
-              {/*
+              
               <FormGroup controlId="problem_file" bsSize="large">
                 <Form.Label>Select Problem File</Form.Label>
                 { <FormControl
@@ -96,7 +97,7 @@ class Calculation extends Component {
                 /> }
                 <FileUploard/>
               </FormGroup>
-              */}
+             
               <Button
                 block
                 bsSize="large"
@@ -106,8 +107,8 @@ class Calculation extends Component {
               >
                 Start
               </Button>
-              {/*<ProgressBar now={this.state.precent} />*/}
-
+              <ProgressBar now={this.state.precent} />
+              <Form.Label>{this.state.result}</Form.Label>
             </form>
           </div>
         );
