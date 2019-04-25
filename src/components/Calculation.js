@@ -13,8 +13,8 @@ class Calculation extends Component {
           problem_name: "",
           lenght: "",
           route: "",
-          precent: 50,
-          result: 56,
+          precent: 0,
+          result: "no result",
         };
     }
 
@@ -46,13 +46,15 @@ class Calculation extends Component {
       if (!problem_name) {
         return;
       }
+      
+      this.setState({precent: 25})
 
       userService.startCalc(problem_name)
         .then(result => {
-
           this.setState({ 
             result: JSON.parse(localStorage.getItem('result')),
-        });
+            precent: 100
+          });
           },
           error => console.log(error) //this.setState({ error, loading: false })
         );
