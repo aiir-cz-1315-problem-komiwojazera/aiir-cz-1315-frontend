@@ -1,3 +1,10 @@
+Installation on Windows:
+1. Download and install npm https://nodejs.org/en/download/
+2. Open Console in Workspace directory (with .JSON files)
+3. npm install
+4. npm start
+Repeat npm install each time you change packages.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
