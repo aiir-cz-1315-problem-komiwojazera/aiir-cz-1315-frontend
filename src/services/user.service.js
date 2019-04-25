@@ -76,7 +76,7 @@ function startCalc(problem_name) {
     };
 
     //return fetch(`${config.apiUrl}/users/registration`, requestOptions)
-    return fetch(`${config.apiUrl}/calcStart`, requestOptions)
+    return fetch(`${config.apiUrl}/startCalc`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // login successful if there's a user in the response
