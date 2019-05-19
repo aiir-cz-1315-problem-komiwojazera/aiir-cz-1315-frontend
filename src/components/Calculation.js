@@ -27,15 +27,18 @@ class Calculation extends Component {
   }
 
     validateForm() {
-        return this.state.problem_name.length > 0;
+        return this.state.problem_name.length > 0 && this.uploadInput.files[0] !==  undefined;
     }
 
       
     handleChange = event => {
+      //nowe
+      this.fileName = event.target.value
+
+      //stare
         this.setState({
           [event.target.id]: event.target.value
         });
-        //tu dodaj request by wystartować obliczenia
     }
 
     handleStart = event => {
@@ -49,7 +52,11 @@ class Calculation extends Component {
 
       this.setState({precent: 25})
 
-      userService.startCalc(problem_name)
+      const data = new FormData();
+      data.append('file', this.uploadInput.files[0]);
+      data.append('filename', this.fileName);
+
+      userService.startCalc(data)
         .then(result => {
           this.setState({ 
             result: JSON.parse(localStorage.getItem('result')),
@@ -88,18 +95,10 @@ class Calculation extends Component {
                   onChange={this.handleChange}
                 />
               </FormGroup>
-              
-              <FormGroup controlId="problem_file" bsSize="large">
-                <Form.Label>Select Problem File</Form.Label>
-                { <FormControl
-                  autoFocus
-                  type="problem_file"
-                  value={this.state.problem_file}
-                  onChange={this.handleChange}
-                /> }
-                <FileUploard/>
-              </FormGroup>
-             
+
+        <div>
+          <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
+        </div>
               <Button
                 block
                 bsSize="large"

@@ -29,10 +29,7 @@ function login(username, password) {
     return fetch(`${config.apiUrl}/login`, requestOptions)
         .then(handleResponse)
         .then(user => {
-            // login successful if there's a user in the response
             if (user) {
-                // store user details and basic auth credentials in local storage 
-                // to keep user logged in between page refreshes
                 user.authdata = window.btoa(username + ':' + password);
                 localStorage.setItem('user', JSON.stringify(user));
             }
@@ -48,14 +45,10 @@ function register(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    //return fetch(`${config.apiUrl}/users/registration`, requestOptions)
     return fetch(`${config.apiUrl}/user/register`, requestOptions)
         .then(handleResponse)
         .then(user => {
-            // login successful if there's a user in the response
             if (user) {
-                // store user details and basic auth credentials in local storage 
-                // to keep user logged in between page refreshes
                 console.log("Register succesful");
                 user.authdata = window.btoa(username + ':' + password);
                 localStorage.setItem('user', JSON.stringify(user));
@@ -64,37 +57,27 @@ function register(username, password) {
         });
 }
 
-function startCalc(problem_name) {
+function startCalc(data) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json',
-        "Authorization": "Basic QWRtaW46MTIzNDU=",
-        "cache-control": "no-cache",},
-        "processData": false,
-        body: JSON.stringify({problem_name}),
-        data: JSON.stringify({problem_name})
+        // headers: { 'Content-Type': 'application/json',
+        // "Authorization": "Basic QWRtaW46MTIzNDU=",
+        // "cache-control": "no-cache",},
+        // "processData": false,
+        body: data,
     };
-
-    //return fetch(`${config.apiUrl}/users/registration`, requestOptions)
     return fetch(`${config.apiUrl}/startCalc`, requestOptions)
         .then(handleResponse)
-        .then(user => {
-            // login successful if there's a user in the response
-            if (user) {
-                // store user details and basic auth credentials in local storage 
-                // to keep user logged in between page refreshes
-                console.log("Started Succesfully");
-                //user.authdata = window.btoa(user);
-                //localStorage.setItem('user', JSON.stringify(user));
+        .then(response => {
+            if (response) {
+                console.log("Started Succesfully "+response);
             }
-
-            return user;
+            return response;
         });
 }
 
 
 function logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('user');
 }
 

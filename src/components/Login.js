@@ -31,7 +31,6 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state)
 
     this.setState({ submitted: true });
     const { username, password, returnUrl } = this.state;
@@ -48,11 +47,8 @@ class Login extends Component {
                 const { from } = this.props.location.state || { from: { pathname: "/" } };
                 this.props.history.push(from);
             },
-            error => this.setState({ error, loading: false }),
-            //alert("Wrong Login")
-            console.log("Wrong Login")
+            error => this.setState({ error, loading: false })
         );
-        console.log(this.state)
   }
 
   render() {
