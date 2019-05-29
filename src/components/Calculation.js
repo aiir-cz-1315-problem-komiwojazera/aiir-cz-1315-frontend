@@ -28,13 +28,13 @@ class Calculation extends Component {
       let userId = user.id
       console.log("EEEEEEE")
       console.log(JSON.stringify({ userId}))
-      userService.getHistory(JSON.stringify({ userId}))
-      .then(
-          history => {
+//      userService.getHistory(JSON.stringify({ userId}))
+//      .then(
+//          history => {
               // const { from } = this.props.location.state || { from: { pathname: "/" } };
               // this.props.history.push(from);
-          },
-      );
+//          },
+//      );
     }
     handleChange = event => {
       //nowe
