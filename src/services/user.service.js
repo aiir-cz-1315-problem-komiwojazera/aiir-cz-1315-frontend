@@ -5,7 +5,8 @@ export const userService = {
     logout,
     getAll,
     register,
-    startCalc
+    startCalc,
+    getHistory,
 };
 
 const config= {
@@ -76,8 +77,20 @@ function startCalc(data) {
         });
 }
 
+function getHistory(data) {
+    const requestOptions = {
+        method: 'POST',
+        body: data,
+    };
+    return fetch(`${config.apiUrl}/getHistory`, requestOptions)
+        .then(handleResponse)
+        .then(response => {
+            return response;
+        });
+}
 
 function logout() {
+    console.log("wtf")
     localStorage.removeItem('user');
 }
 
