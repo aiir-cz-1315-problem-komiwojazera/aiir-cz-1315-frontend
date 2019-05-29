@@ -68,7 +68,8 @@ class Calculation extends Component {
         .then(result => {
 	console.log(result)
           this.setState({ 
-            result: JSON.parse(result.result),
+            result: result.result,
+			route: result.route,		
             precent: 100
           });
           },
