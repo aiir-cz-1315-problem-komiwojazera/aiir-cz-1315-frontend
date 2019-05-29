@@ -66,8 +66,9 @@ class Calculation extends Component {
 
       userService.startCalc(data)
         .then(result => {
+	console.log(result)
           this.setState({ 
-            result: JSON.parse(localStorage.getItem('result')),
+            result: JSON.parse(result.result),
             precent: 100
           });
           },
