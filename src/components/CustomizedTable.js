@@ -34,16 +34,16 @@ const styles = theme => ({
   },
 });
 
-function createData(name, points, id) { //(place, img, name, points) {
+function createData(name, points, id, tsp_path) { //(place, img, name, points) {
   //return { place, img, name, points };
-  return { name, points, id };
+  return { name, points, id, tsp_path };
 }
 
 function createRows(props) {
   let rows = []
   if (props.entries != undefined) {
     props.entries.map(entry => (
-      rows.push(createData(entry.name, String(entry.cost), entry.id))
+      rows.push(createData(entry.name, String(entry.cost), entry.id, entry.route))
       ))
     return rows
   }
@@ -55,6 +55,7 @@ function CustomizedTable(props) {
 
   const cols = [
 	 { header : 'Name', name: 'name' },
+     { header: 'route', name: 'route'},
 	 { header: 'cost', name: 'cost' }
 	];
 
@@ -63,11 +64,12 @@ function CustomizedTable(props) {
   </TableRow>
 
   var cells
- // rows = [{cost: 583, name: "Komiwojazer nr 1"}]
+ // rows = [{cost: 583, name: "Komiwojazer nr 1"}]  
   if (rows != undefined) {
     cells = rows.map(row => (
       <TableRow className={classes.row} key={row.id} cols={cols}>
         <CustomTableCell align="left">{row.name}</CustomTableCell>
+		<CustomTableCell align="left" class="path_cell">{row.tsp_path}</CustomTableCell>
         <CustomTableCell align="right">{row.points}</CustomTableCell>
       </TableRow>
     ))

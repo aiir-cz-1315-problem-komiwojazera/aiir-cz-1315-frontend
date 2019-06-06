@@ -29,4 +29,9 @@
     .Calculations button {
         margin-bottom: 2rem;
     }
+	
+	.path_cell {
+		color: blue;
+		width: auto;
+	}
 }
