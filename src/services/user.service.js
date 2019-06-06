@@ -82,6 +82,8 @@ function getHistory(data) {
         method: 'POST',
         body: data,
     };
+console.log("Id co wysylam przy get history:")
+console.log(data)
     return fetch(`${config.apiUrl}/getHistory`, requestOptions)
         .then(handleResponse)
         .then(response => {

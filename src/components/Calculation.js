@@ -26,15 +26,18 @@ class Calculation extends Component {
 
       let user = JSON.parse(localStorage.getItem('user'))
       let userId = user.id
-      console.log("EEEEEEE")
+      console.log("ZZZZZZZ")
       console.log(JSON.stringify({ userId}))
-//      userService.getHistory(JSON.stringify({ userId}))
-//      .then(
-//          history => {
-              // const { from } = this.props.location.state || { from: { pathname: "/" } };
-              // this.props.history.push(from);
-//          },
-//      );
+      const data = new FormData();
+      data.append('user', userId);
+      userService.getHistory(data)
+      .then(
+          history => {
+	 	console.log("rtrtrtrtrt")
+		console.log(history)
+	      this.history = history;
+          },
+      );
     }
     handleChange = event => {
       //nowe
@@ -92,7 +95,7 @@ class Calculation extends Component {
           
           <div>
             <div style={tableStyle}>
-  <CustomizedTable />
+  <CustomizedTable entries={this.history}/>
 </div>
 <div className="Calculations">
 

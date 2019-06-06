@@ -34,15 +34,16 @@ const styles = theme => ({
   },
 });
 
-function createData(place, img, name, points) {
-  return { place, img, name, points };
+function createData(name, points, id) { //(place, img, name, points) {
+  //return { place, img, name, points };
+  return { name, points, id };
 }
 
 function createRows(props) {
   let rows = []
   if (props.entries != undefined) {
-    props.users.map(entry => (
-      rows.push(createData(entry.name, entry.cost))
+    props.entries.map(entry => (
+      rows.push(createData(entry.name, String(entry.cost), entry.id))
       ))
     return rows
   }
@@ -52,17 +53,22 @@ function CustomizedTable(props) {
   const { classes } = props;
   let rows = createRows(props)
 
+  const cols = [
+	 { header : 'Name', name: 'name' },
+	 { header: 'cost', name: 'cost' }
+	];
+
   var header = <TableRow >
   <CustomTableCell align="center">History</CustomTableCell>
   </TableRow>
 
   var cells
-  rows = [{cost: 583, name: "Komiwojazer nr 1"}]
+ // rows = [{cost: 583, name: "Komiwojazer nr 1"}]
   if (rows != undefined) {
     cells = rows.map(row => (
-      <TableRow className={classes.row} key={row.cost}>
+      <TableRow className={classes.row} key={row.id} cols={cols}>
         <CustomTableCell align="left">{row.name}</CustomTableCell>
-        <CustomTableCell align="right">{row.cost}</CustomTableCell>
+        <CustomTableCell align="right">{row.points}</CustomTableCell>
       </TableRow>
     ))
   } else {
