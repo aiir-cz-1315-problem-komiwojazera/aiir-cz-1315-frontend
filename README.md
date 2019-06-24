@@ -1,9 +1,13 @@
-Installation on Windows:
+#### aiir-cz-1315-frontend
+Project was made for the "Aplikacje Internetowe i Rozporoszone" course. Its purpose was to make web aplication capable of solving th travelling salesman problem using multiple computers. 
+## Technologies used
+For the frontend of our application we have used HTML5 & CSS alongside Javascript and React.  
+## Installation on Windows:
 1. Download and install npm https://nodejs.org/en/download/
 2. Open Console in Workspace directory (with .JSON files)
 3. npm install
 4. npm start
-Repeat npm install each time you change packages.
+Repeat npm install each time you change packages. NPM will recognize code changes and restart itself otherwise.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
